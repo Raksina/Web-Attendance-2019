@@ -1,0 +1,5 @@
+http://www.daydev.com/firebase/web-authentication-with-firebase.html
+
+http://www.daydev.com/developer/google-developers/firebase-authentication-web.html
+
+https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account

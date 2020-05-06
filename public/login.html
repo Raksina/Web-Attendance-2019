@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Attendance</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <style>
+        body {background-color: #8B96A7; color: #FFFFFF;}
+        div.container {margin: 8%;}
+        a.btn {background-color: #298BD6; color: white;} </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login</h2>
+
+        <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" id="email" class="form-control" placeholder="E-mail">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+        </div>
+        <a class="btn" href="register.html">Sign up</a>
+        <button type="submit" class="btn btn-primary" onclick="submitOnClick()">Login</button>
+    </div>
+
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCobEUSUV9_Mc98M79ixSFwPqNUgh8IhyE",
+    authDomain: "web-attendance-82100.firebaseapp.com",
+    databaseURL: "https://web-attendance-82100.firebaseio.com",
+    projectId: "web-attendance-82100",
+    storageBucket: "web-attendance-82100.appspot.com",
+    messagingSenderId: "705960730040",
+    appId: "1:705960730040:web:1a94107253aa4a0d70c34d",
+    measurementId: "G-9952L3JE79"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+function submitOnClick(){
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        errors.style.display = (errors.style.display === "none" || errors.style.display === "") ? "block" : "none";
+        console.log(error);
+        errors.innerHTML = error + "<br/>";
+});
+
+    firebase.auth().onAuthStateChanged(user => {  
+    if (user) {
+      var fireBase_name = user.displayName;
+      var fireBase_email = user.email;
+      var fireBase_emailVerified = user.emailVerified;
+      var fireBase_uid = user.uid;
+      var success = document.getElementById('success');
+      success.display = (success.display === "none" || success.display === "") ? "block" : "none";
+      success.innerHTML = "User Logged in with Credentials: <br />" +
+        "<b>Name:</b> " + fireBase_name + "<br />" + 
+        "<b>Email: </b>" + fireBase_email + "<br />" + 
+        "<b>emailVerified: </b>" + fireBase_emailVerified + "<br />" + 
+        "<b>uid: </b>" + fireBase_uid + "<br />";
+        window.location = "student1.html";
+        console.log("login");
+    } 
+  });
+}
+</script>
+</html>
